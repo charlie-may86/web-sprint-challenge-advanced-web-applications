@@ -1,17 +1,39 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Login from "./components/Login";
 import "./styles.scss";
 
+import axiosWithAuth from "./helpers/axiosWithAuth";
+
 function App() {
+  const logout = () => {
+    axiosWithAuth()
+      .post("/logout")
+      .then((res) => {
+        console.log(res);
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      });
+  };
+
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <a data-testid="logoutButton" href="#">logout</a>
+          <a onClick={logout} data-testid="logoutButton" href="google.com">
+            logout
+          </a>
         </header>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <Route path="/login" component={Login} />
+        <Route path="/" />
       </div>
     </Router>
   );
