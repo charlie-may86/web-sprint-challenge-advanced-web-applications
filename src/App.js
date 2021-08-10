@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import "./styles.scss";
 
 import axiosWithAuth from "./helpers/axiosWithAuth";
+import PrivateRoute from "./components/PrivateRoute";
+import BubblePage from "./components/BubblePage";
 
 function App() {
   const logout = () => {
@@ -32,8 +34,12 @@ function App() {
         <li>
           <Link to="/login">Login</Link>
         </li>
+        <li>
+          <Link to="/protected">Bubble Page </Link>
+        </li>
         <Route path="/login" component={Login} />
         <Route path="/" />
+        <PrivateRoute exact path="/protected" component={BubblePage} />
       </div>
     </Router>
   );
