@@ -27,6 +27,7 @@ const BubblePage = () => {
 
   const saveEdit = (editColor) => {
     console.log("this is the log button");
+    console.log(editColor);
   };
 
   const deleteColor = (colorToDelete) => {
